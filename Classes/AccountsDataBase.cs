@@ -10,7 +10,7 @@ public class AccountsDataBase : IStaticPrintable
     }
 
 
-    public static void PrintForStatic()
+    public static void PrintInfoForStatic()
     {
         foreach (var variable in accounts)
         {
