@@ -1,5 +1,4 @@
 namespace ConsoleApp;
-
 public class Account : IPrintable
 {
     // Password and DateBirth
