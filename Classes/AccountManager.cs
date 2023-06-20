@@ -13,6 +13,8 @@ public class AccountManager
         if (!IsAccountAvaible(login))
         {
             AccountsDataBase.accounts.Add(login,password);
+            FileWriter.CreateAndWrite(login,password);
+            
             return true;
         }
         return false;

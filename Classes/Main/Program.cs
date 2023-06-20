@@ -19,6 +19,7 @@ namespace ConsoleApp
             Methods.Insert(0, "Null");
 
             bool InAccount = default;
+            
 
             void PrintFuncs()
             {
@@ -39,28 +40,32 @@ namespace ConsoleApp
                 if (Choice == 1)
                 {
                     #region SignIn
-
-                    Account SignAccount;
-
+                 
+                    Console.Clear();
+                    
                     string login;
                     int password;
                     DateTime dateTime;
+                    
 
                     AccountManager.DataRequest(out login, out password);
                     AccountManager.BirthDateRequest(out dateTime);
+                    
 
                     if (!manager.TrySignIn(login, password))
                         throw new ArgumentException($"Account {login} has already exist");
-                    SignAccount = new Account(login, password, dateTime);
+                    new Account(login, password, dateTime);
 
-                    AccountsDataBase.PrintInfoForStatic();
-
+                    Console.Clear();
+                    
                     #endregion
                 }
 
                 if (Choice == 2)
                 {
                     #region LogIn
+                    
+                    Console.Clear();
 
                     string login;
                     int password;
