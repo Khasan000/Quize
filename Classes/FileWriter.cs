@@ -6,8 +6,7 @@ public class FileWriter
     {
         if (File.Exists(login + ".txt"))
         {
-            Console.WriteLine("File with name {0} already exist", login + ".txt");
-            return;
+            throw new ArgumentException("File has already exist!");
         }
         
         using (FileStream fs = new FileStream(login+".txt", FileMode.CreateNew))
