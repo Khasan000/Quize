@@ -1,21 +1,48 @@
+using System.Collections;
+
 namespace ConsoleApp;
 
 public class FileWriter
 {
-    public static void CreateAndWrite(string login, int password)
+    public static void CreateFile(string login, string password)
     {
-        if (File.Exists(login + ".txt"))
+        Console.Clear();
+        using (StreamWriter writer = new StreamWriter(login + ".txt"))
         {
-            throw new ArgumentException("File has already exist!");
-        }
-        
-        using (FileStream fs = new FileStream(login+".txt", FileMode.CreateNew))
-        {
-            byte[] array = System.Text.Encoding.Default.GetBytes(login+"\n");
-            byte[] array1 = System.Text.Encoding.Default.GetBytes(password.ToString());
-
-            fs.Write(array);
-            fs.Write(array1);
+            writer.WriteLine(password);
+            writer.Close();
         }
     }
+    public static void ChangePassword(string login, string password, string newPassword)
+    {
+        Console.Clear();
+       
+        if (!File.Exists(login + ".txt"))
+        {
+            Console.WriteLine($"Account {login} does not exist");
+            return;
+        }
+        
+        using (StreamReader reader = new StreamReader(login + ".txt"))
+        {
+            string passwordInFile = reader.ReadLine();
+            reader.Close();
+
+            if (passwordInFile != password)
+            {
+                Console.WriteLine("Incorrect password!");
+                return;
+            }
+        }
+        
+        string[] lines = File.ReadAllLines(login + ".txt");//
+
+        lines[0] = newPassword;
+            
+            
+        File.WriteAllLines(login+".txt",lines);
+    }
+    
+
+    
 }

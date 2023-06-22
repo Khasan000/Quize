@@ -8,36 +8,37 @@ public class AccountManager
         return containsKey = AccountsDataBase.accounts.ContainsKey(login);
     }
         
-    public bool TrySignIn(string login, int password)
+    public bool TrySignIn(string login, string password)
     {
-        if (!IsAccountAvaible(login))
+        if (!File.Exists(login+".txt"))
         {
-            AccountsDataBase.accounts.Add(login,password);
-            FileWriter.CreateAndWrite(login,password);
+            FileWriter.CreateFile(login,password);
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryLogIn(string login, string password)
+    {
+        if (File.Exists(login + ".txt"))
+        {
             
             return true;
         }
         return false;
     }
 
-    public bool TryLogIn(string login, int password)
-    {
-        if (AccountsDataBase.accounts.ContainsKey(login) && AccountsDataBase.accounts.ContainsValue(password))
-            return true;
-        return false;
-    }
-
-    public static void DataRequest(out string loginOut, out int passwordOut)
+    public static void DataRequest(out string loginOut, out string passwordOut)
     {
         Console.Write("Enter login: ");
         string login = Console.ReadLine();
         
-        int password = default;
+        string password = default;
 
         try
         {
             Console.Write("Enter password: ");
-            password = int.Parse(Console.ReadLine());
+            password = Console.ReadLine();
         }
         catch (Exception e)
         {

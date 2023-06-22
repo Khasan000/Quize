@@ -10,16 +10,12 @@ namespace ConsoleApp
 
         static void Main()
         {
-            AccountManager manager = new AccountManager();
-            AccountsDataBase dataBase = new AccountsDataBase();
+            #region Main
 
-            const int StartChoice = 1;
+            AccountManager manager = new AccountManager();
 
             List<string> Methods = new List<string>() { "SignIn", "LogIn", "Start new Quize" };
             Methods.Insert(0, "Null");
-
-            bool InAccount = default;
-            
 
             void PrintFuncs()
             {
@@ -29,7 +25,7 @@ namespace ConsoleApp
                 }
             }
 
-
+            #endregion
             while (true)
             {
                 PrintFuncs();
@@ -44,7 +40,7 @@ namespace ConsoleApp
                     Console.Clear();
                     
                     string login;
-                    int password;
+                    string password;
                     DateTime dateTime;
                     
 
@@ -53,9 +49,10 @@ namespace ConsoleApp
                     
 
                     if (!manager.TrySignIn(login, password))
-                        throw new ArgumentException($"Account {login} has already exist");
-                    new Account(login, password, dateTime);
-
+                        continue;
+                    
+                    
+                    
                     Console.Clear();
                     
                     #endregion
@@ -68,20 +65,13 @@ namespace ConsoleApp
                     Console.Clear();
 
                     string login;
-                    int password;
+                    string password;
 
                     AccountManager.DataRequest(out login, out password);
 
                     if (manager.TryLogIn(login, password))
                     {
-                        if (InAccount)
-                        {
-                            Console.WriteLine("You are already logged in");
-                            continue;
-                        }
-
-                        Console.WriteLine("Successful login! : {0}", login);
-                        InAccount = true;
+                        
                     }
 
                     #endregion
@@ -90,6 +80,22 @@ namespace ConsoleApp
                 if (Choice == 3)
                 {
 
+                }
+
+                if (Choice == 4)
+                {
+                    string login = Console.ReadLine();
+                    string password = Console.ReadLine();
+                    
+                    FileWriter.CreateFile(login,password);
+                }
+
+                if (Choice == 5)
+                {
+                    string login = Console.ReadLine();
+                    string password = Console.ReadLine();
+                    string newPassword = Console.ReadLine();
+                    FileWriter.ChangePassword(login,password,newPassword);
                 }
             }
         }
