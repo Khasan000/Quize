@@ -49,6 +49,24 @@ public class AccountManager
         loginOut = login;
         passwordOut = password;
     }
+    
+    public static void DataRequest(out string loginOut, out string passwordOut,out string newPasswordOut)
+    {
+        Console.Write("Enter login: ");
+        string login = Console.ReadLine();
+
+        Console.Write("Enter password: ");
+        string password = Console.ReadLine();
+        
+        Console.Write("Enter NewPassword: ");
+        string NewPassword = Console.ReadLine();
+        
+            
+
+        loginOut = login;
+        passwordOut = password;
+        newPasswordOut = NewPassword;
+    }
 
     public static void BirthDateRequest(out DateTime BirthDay)
     {
@@ -75,4 +93,5 @@ public class AccountManager
 
         BirthDay = dateTime;
     }
+    
 }
