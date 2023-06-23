@@ -48,7 +48,7 @@ namespace ConsoleApp
                     AccountManager.BirthDateRequest(out dateTime);
                     
 
-                    if (!manager.TrySignIn(login, password))
+                    if (!manager.TrySignIn(login, password,dateTime))
                         continue;
                     
                     
@@ -63,40 +63,29 @@ namespace ConsoleApp
                     #region LogIn
                     
                     Console.Clear();
+                    
+                    AccountManager.DataRequest(out var login, out var password);
 
-                    string login;
-                    string password;
-
-                    AccountManager.DataRequest(out login, out password);
-
-                    if (manager.TryLogIn(login, password))
+                    if (!manager.TryLogIn(login, password))
                     {
-                        
+                        Console.WriteLine("Failed to LogIn!");
+                        continue;
                     }
+                    
+                    Console.Clear();
+                    Console.WriteLine($"Welcome {login}!");
 
                     #endregion
                 }
 
                 if (Choice == 3)
                 {
-
-                }
-
-                if (Choice == 4)
-                {
-                    string login = Console.ReadLine();
-                    string password = Console.ReadLine();
-                    
-                    FileWriter.CreateFile(login,password);
-                }
-
-                if (Choice == 5)
-                {
-                    string login = Console.ReadLine();
-                    string password = Console.ReadLine();
-                    string newPassword = Console.ReadLine();
+                    AccountManager.DataRequest(out var login, out var password,out var newPassword);
                     FileWriter.ChangePassword(login,password,newPassword);
+                    
+
                 }
+
             }
         }
     }
