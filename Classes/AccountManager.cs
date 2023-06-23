@@ -2,30 +2,32 @@ namespace ConsoleApp;
 
 public class AccountManager
 {
-    public static bool IsAccountAvaible(string login)
+    public static bool IsExist(string login)
     {
-        bool containsKey;
-        return containsKey = AccountsDataBase.accounts.ContainsKey(login);
+        return File.Exists(login + ".txt");
     }
-        
-    public bool TrySignIn(string login, string password)
+    
+    public bool TrySignIn(string login, string password,DateTime dateTime)
     {
-        if (!File.Exists(login+".txt"))
+        if (!IsExist(login))
         {
-            FileWriter.CreateFile(login,password);
+            FileWriter.CreateFile(login,password,dateTime);
             return true;
         }
+
+        Console.WriteLine($"Account {login} already exists!");
         return false;
     }
 
     public bool TryLogIn(string login, string password)
     {
-        if (File.Exists(login + ".txt"))
+        if (!IsExist(login))
         {
-            
-            return true;
+            Console.WriteLine("Account does not exist!");
+            return false;
         }
-        return false;
+        
+        return FileWriter.CheckPassword(login, password);
     }
 
     public static void DataRequest(out string loginOut, out string passwordOut)
