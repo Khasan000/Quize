@@ -51,16 +51,12 @@ namespace ConsoleApp
                     string login;
                     string password;
                     DateTime dateTime;
-                    
 
                     AccountManager.DataRequest(out login, out password);
                     AccountManager.BirthDateRequest(out dateTime);
                     
-
                     if (!AccountManager.TrySignIn(login, password,dateTime))
                         continue;
-                    
-                    
                     
                     Console.Clear();
                     
