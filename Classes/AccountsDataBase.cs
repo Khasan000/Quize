@@ -1,6 +1,6 @@
 namespace ConsoleApp;
 
-public class AccountsDataBase : IStaticPrintable
+public class AccountsDataBase 
 {
     protected internal static Dictionary<string, int> accounts = new Dictionary<string, int>();
 

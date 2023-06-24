@@ -4,7 +4,7 @@ namespace ConsoleApp;
 
 public class FileWriter
 {
-    public static void CreateFile(string login, string password, DateTime dateTime)
+    public static void CreateFile(string login, string password, DateTime dateTime) // protected
     {
         Console.Clear();
         using (StreamWriter writer = new StreamWriter(login + ".txt"))
@@ -18,15 +18,9 @@ public class FileWriter
             writer.Close();
         }
     }
-    public static void ChangePassword(string login, string password, string newPassword)
+    public static void ChangePassword(string login, string password, string newPassword) // protected
     {
         Console.Clear();
-
-        if (!CheckPassword(login, password))
-        {
-            Console.WriteLine("Incorrect password!");
-            return;
-        }
         
         string[] lines = File.ReadAllLines(login + ".txt");//
         lines[0] = newPassword;
@@ -34,7 +28,18 @@ public class FileWriter
         File.WriteAllLines(login+".txt",lines);
     }
 
-    public static bool CheckPassword(string login,string password)
+    public static void ChangeDateTime(string login, string password, DateTime dateTime) // nonprotected
+    {
+        Console.Clear();
+        
+        string[] lines = File.ReadAllLines(login + ".txt");//
+        lines[1] = dateTime.Date.Day + "." + dateTime.Date.Month + "." + dateTime.Date.Year;
+        
+        File.WriteAllLines(login+".txt",lines);
+
+    }
+
+    public static bool CheckPassword(string login,string password) // nonprotected
     {
         Console.Clear();
 

@@ -2,12 +2,11 @@ namespace ConsoleApp;
 
 public class AccountManager
 {
-    public static bool IsExist(string login)
+    private static bool IsExist(string login)
     {
         return File.Exists(login + ".txt");
     }
-    
-    public bool TrySignIn(string login, string password,DateTime dateTime)
+    public static bool TrySignIn(string login, string password,DateTime dateTime)
     {
         if (!IsExist(login))
         {
@@ -18,18 +17,24 @@ public class AccountManager
         Console.WriteLine($"Account {login} already exists!");
         return false;
     }
-
-    public bool TryLogIn(string login, string password)
+    public static bool TryLogIn(string login, string password)
     {
         if (!IsExist(login))
         {
             Console.WriteLine("Account does not exist!");
             return false;
         }
-        
         return FileWriter.CheckPassword(login, password);
     }
-
+    public static void TryChangeDateTime(string login, string password, DateTime dateTime)
+    {
+        FileWriter.ChangeDateTime(login,password,dateTime);
+    }
+    public static bool TryChangePassword(string login, string password, string newPassword)
+    {
+        FileWriter.ChangePassword (login, password, newPassword);
+        return true;
+    }
     public static void DataRequest(out string loginOut, out string passwordOut)
     {
         Console.Write("Enter login: ");
@@ -51,7 +56,6 @@ public class AccountManager
         loginOut = login;
         passwordOut = password;
     }
-    
     public static void DataRequest(out string loginOut, out string passwordOut,out string newPasswordOut)
     {
         Console.Write("Enter login: ");
@@ -69,7 +73,6 @@ public class AccountManager
         passwordOut = password;
         newPasswordOut = NewPassword;
     }
-
     public static void BirthDateRequest(out DateTime BirthDay)
     {
         DateTime dateTime = default; // year month day
