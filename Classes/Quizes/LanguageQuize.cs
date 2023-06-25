@@ -52,8 +52,6 @@ public class LanguageQuize : IQuize
             Console.Clear();
         }
         FileWriter.WriteQuizeResult(login,counter,nameof(LanguageQuize));
-
-        
     }
     
 }
