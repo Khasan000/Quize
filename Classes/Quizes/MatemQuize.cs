@@ -2,29 +2,26 @@ using TestCode.CS_Files.Git.Interfaces;
 
 namespace ConsoleApp;
 
-public class LanguageQuize : IQuize
+public class MatemQuize : IQuize
 {
-
     private static List<string> questions = new List<string>()
     {
-        new string("Мой любимый язык?"),
-        new string("Каким знаком обозначается что тип может допускать null?"),
-        new string("Каким ключевый словом создается новое пространство имен?"),
-        new string("Каким ключевым словом мы передаем в функцию поле по ссылке?"),
-        new string("Какое ключевое слово нужно, чтобы вызвать кастомное исключение?")
+        new string("1+1?"),
+        new string("100+150?"),
+        new string("Корень из 121?"),
+        new string("Формула дискриминанта?"),
+        new string("10*11?")
     };
+    private static List<string> answers = new List<string>() { "2", "250", "11", "b2-4ac", "110" };
 
-    private static List<string> answers = new List<string>() { "C#", "?", "namespace", "ref", "throw" };
     
-
+    
     public static void Start(string login)
     {
         Console.Clear();
         int counter = 0;
-        Game(ref counter,login);
+        Game(ref counter, login);
     }
-
-   
 
     public static void Game(ref int counter,string login)
     {
@@ -51,9 +48,6 @@ public class LanguageQuize : IQuize
             Thread.Sleep(1000);
             Console.Clear();
         }
-        FileWriter.WriteQuizeResult(login,counter,nameof(LanguageQuize));
-
-        
+        FileWriter.WriteQuizeResult(login,counter,nameof(MatemQuize));
     }
-    
 }

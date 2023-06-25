@@ -27,8 +27,7 @@ public class FileWriter
 
         File.WriteAllLines(login+".txt",lines);
     }
-
-    public static void ChangeDateTime(string login, string password, DateTime dateTime) // nonprotected
+    public static void ChangeDateTime(string login, string password, DateTime dateTime) 
     {
         Console.Clear();
         
@@ -38,8 +37,7 @@ public class FileWriter
         File.WriteAllLines(login+".txt",lines);
 
     }
-
-    public static bool CheckPassword(string login,string password) // nonprotected
+    public static bool CheckPassword(string login,string password) 
     {
         Console.Clear();
 
@@ -56,7 +54,16 @@ public class FileWriter
             return true;
         }
     }
-    
+
+    public static void WriteQuizeResult(string login,int result,string QuizeName)
+    {
+        using (StreamWriter writer = new StreamWriter(login + ".txt",true))
+        {
+            writer.WriteLine("\n");
+            writer.WriteLine($"Your result for {QuizeName}: {result}/5");
+            writer.Close();
+        }
+    }
     
     
 

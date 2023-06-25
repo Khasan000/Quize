@@ -16,6 +16,7 @@ namespace ConsoleApp
 
             List<string> Methods = new List<string>() { "Null" ,"SignIn", "LogIn", "Start new Quize","Exit"};
             List<string> Actions = new List<string>() { "Null" ,"Change Password", "Change DateTime","Start Quize" };
+            List<string> Quizes = new List<string>() { "Null", "Language Quize", "Matem Quize","Russ Language" };
             
 
             void PrintFuncs()
@@ -30,7 +31,15 @@ namespace ConsoleApp
             {
                 for (int i = 1; i < Actions.Count; i++)
                 {
-                    Console.WriteLine($"{i}) {Actions[i]}"); // вывод доступных функций
+                    Console.WriteLine($"{i}) {Actions[i]}"); 
+                }
+            }
+
+            void PrintQuize()
+            {
+                for (int i = 1; i < Quizes.Count; i++)
+                {
+                    Console.WriteLine($"{i}) {Quizes[i]}"); 
                 }
             }
 
@@ -87,7 +96,7 @@ namespace ConsoleApp
                 if (Choice == 3)
                 {
                     AccountManager.DataRequest(out var login, out var password,out var newPassword);
-                    if (!AccountManager.TryChangePassword(login, password, newPassword))
+                    if (!AccountManager.ChangePassword(login, password, newPassword))
                     {
                         Console.WriteLine("Error!");
                         continue;
@@ -120,20 +129,37 @@ namespace ConsoleApp
 
                     if (choice == 1)
                     {
+                        Console.Clear();
                         string newPassword = Console.ReadLine();
-                        AccountManager.TryChangePassword(login,password,newPassword);
+                        AccountManager.ChangePassword(login,password,newPassword);
                         Console.Clear();
                     } // Change Password
 
                     if (choice == 2)
                     {
+                        Console.Clear();
                         AccountManager.BirthDateRequest(out var dateTime);
-                        AccountManager.TryChangeDateTime(login, password, dateTime);
+                        AccountManager.ChangeDateTime(login, password, dateTime);
                     } // Change DateTime
 
                     if (choice == 3)
                     {
-                        LanguageQuize.Start();
+                        Console.Clear();
+                        PrintQuize();
+                        int choiceQuize=int.Parse(Console.ReadLine());
+
+                        switch (choiceQuize)
+                        {
+                            case 1:
+                                LanguageQuize.Start(login);
+                                break;
+                            case 2:
+                                MatemQuize.Start(login);
+                                break;
+                            case 3:
+                                RussLanguage.Start(login);
+                                break;
+                        }
                     }
 
                     #endregion
@@ -145,9 +171,7 @@ namespace ConsoleApp
                     Console.WriteLine("Exit...");
                     Environment.Exit(1);
                 }
-
                 
-
             }
         }
     }

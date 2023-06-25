@@ -26,11 +26,11 @@ public class AccountManager
         }
         return FileWriter.CheckPassword(login, password);
     }
-    public static void TryChangeDateTime(string login, string password, DateTime dateTime)
+    public static void ChangeDateTime(string login, string password, DateTime dateTime)
     {
         FileWriter.ChangeDateTime(login,password,dateTime);
     }
-    public static bool TryChangePassword(string login, string password, string newPassword)
+    public static bool ChangePassword(string login, string password, string newPassword)
     {
         FileWriter.ChangePassword (login, password, newPassword);
         return true;
